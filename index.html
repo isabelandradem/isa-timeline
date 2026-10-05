@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Isa's egg freezing timeline</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F6F8FC; --ink:#1C2333; --soft:#4A5468; --faint:#7A8396;
+  --mist:#E3EAF6; --line:#D3DCEB; --indigo:#2F3E8F; --marigold:#E9A522; --marigold-ink:#5C3B00;
+  --done:#9AA6BD; --card:#FFFFFF;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#121725; --ink:#E9EDF6; --soft:#B4BDD0; --faint:#8790A6;
+    --mist:#1D2538; --line:#2C3650; --indigo:#A9B6FF; --marigold:#F2B84B; --marigold-ink:#2B1C00;
+    --done:#566079; --card:#182033;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#121725; --ink:#E9EDF6; --soft:#B4BDD0; --faint:#8790A6;
+  --mist:#1D2538; --line:#2C3650; --indigo:#A9B6FF; --marigold:#F2B84B; --marigold-ink:#2B1C00;
+  --done:#566079; --card:#182033;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:"Figtree",system-ui,-apple-system,"Segoe UI",sans-serif;font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+main{max-width:640px;margin:0 auto;padding:2.5rem 1.25rem 4rem}
+h1,h2,h3{font-family:"Young Serif",Georgia,"Times New Roman",serif;font-weight:400;line-height:1.2;margin:0}
+h1{font-size:2.1rem;letter-spacing:-0.01em}
+h2{font-size:1.4rem;margin:3rem 0 1rem}
+h3{font-size:1.15rem}
+p{margin:0 0 .75rem}
+.lede{color:var(--soft);margin-top:.75rem;max-width:34em}
+
+.now{margin:2rem 0 0;padding:1.25rem;background:var(--mist);border-radius:18px}
+.now-label{font-size:.85rem;color:var(--soft);font-weight:500}
+.now-title{font-family:"Young Serif",Georgia,serif;font-size:1.3rem;margin:.2rem 0 .4rem}
+.now-body{color:var(--soft);margin:0}
+
+.strip{position:relative;margin:1.5rem 0 .25rem;height:46px}
+.track{position:absolute;left:0;right:0;top:20px;height:6px;border-radius:3px;background:var(--line);overflow:hidden}
+.fill{position:absolute;left:0;top:0;bottom:0;background:var(--indigo);border-radius:3px}
+.tick{position:absolute;top:14px;width:2px;height:18px;background:var(--paper)}
+.today{position:absolute;top:10px;width:26px;height:26px;margin-left:-13px;border-radius:50%;background:var(--marigold);border:4px solid var(--paper)}
+.strip-labels{display:flex;justify-content:space-between;font-size:.8rem;color:var(--faint)}
+
+ol.timeline{list-style:none;margin:0;padding:0;position:relative}
+ol.timeline::before{content:"";position:absolute;left:11px;top:8px;bottom:8px;width:2px;background:var(--line)}
+.step{position:relative;padding:0 0 2rem 40px}
+.dot{position:absolute;left:4px;top:5px;width:16px;height:16px;border-radius:50%;background:var(--paper);border:2px solid var(--indigo)}
+.step.is-done .dot{background:var(--done);border-color:var(--done)}
+.step.is-now .dot{background:var(--marigold);border-color:var(--marigold);width:22px;height:22px;left:1px;top:2px}
+.when{font-size:.9rem;color:var(--indigo);font-weight:600;margin-bottom:.15rem}
+.step.is-done .when{color:var(--faint)}
+.step.is-done h3,.step.is-done p{color:var(--faint)}
+.pill{display:inline-block;font-size:.75rem;font-weight:600;padding:.1rem .55rem;border-radius:999px;margin-left:.4rem;vertical-align:2px}
+.pill-now{background:var(--marigold);color:var(--marigold-ink)}
+.pill-done{background:var(--mist);color:var(--soft)}
+.step p{color:var(--soft);margin:.35rem 0 0}
+.help{margin:.6rem 0 0;padding:.6rem .85rem;border-left:3px solid var(--indigo);background:var(--card);border-radius:0;color:var(--ink);font-size:.95rem}
+.help strong{font-weight:600}
+
+.day{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:1.25rem 1.25rem .5rem}
+.day ul{margin:.5rem 0 1rem;padding-left:1.2rem}
+.day li{margin:.35rem 0;color:var(--soft)}
+.day li strong{color:var(--ink);font-weight:600}
+
+.notes p{color:var(--soft)}
+.call{font-weight:600;color:var(--indigo);text-decoration:none}
+.call:focus-visible{outline:2px solid var(--indigo);outline-offset:2px;border-radius:4px}
+footer{margin-top:3rem;padding-top:1rem;border-top:1px solid var(--line);font-size:.85rem;color:var(--faint)}
+@media (max-width:420px){h1{font-size:1.8rem}}
+
+:root{--c-pill:#C9C3F2;--c-shot:#F4B9A0;--c-rest:#C8E6D6;--c-ret:#E9A522}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--c-pill:#4B4592;--c-shot:#8A3F22;--c-rest:#25574A;--c-ret:#F2B84B}}
+:root[data-theme="dark"]{--c-pill:#4B4592;--c-shot:#8A3F22;--c-rest:#25574A;--c-ret:#F2B84B}
+.legend{display:flex;flex-wrap:wrap;gap:.4rem 1rem;font-size:.85rem;color:var(--soft);margin:-.25rem 0 1rem}
+.legend span{display:flex;align-items:center;gap:.4rem}
+.legend i{display:inline-block;width:14px;height:14px;border-radius:4px}
+.hatch{background:repeating-linear-gradient(135deg,var(--c-ret) 0 3px,transparent 3px 6px);border:1px solid var(--c-ret)}
+.cal{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px}
+.dow{font-size:.75rem;color:var(--faint);text-align:center;padding-bottom:2px}
+.cell{position:relative;aspect-ratio:1/1.15;border-radius:10px;background:var(--card);border:1px solid var(--line);padding:4px 5px;font:inherit;color:var(--ink);text-align:left;cursor:pointer;display:flex;flex-direction:column;justify-content:space-between;min-width:0}
+.cell:focus-visible{outline:2px solid var(--indigo);outline-offset:1px}
+.cell.empty{background:transparent;border-color:transparent;cursor:default}
+.cell .n{font-size:.9rem;font-weight:500;line-height:1}
+.cell .tag{font-size:.62rem;line-height:1.15;color:var(--ink);overflow:hidden;font-weight:500}
+.cell.pill{background:var(--c-pill);border-color:transparent}
+.cell.shot{background:var(--c-shot);border-color:transparent}
+.cell.rest{background:var(--c-rest);border-color:transparent}
+.cell.ret{background:repeating-linear-gradient(135deg,var(--c-ret) 0 3px,transparent 3px 7px),var(--card);border-color:var(--c-ret)}
+.cell.past{opacity:.45}
+.cell.is-today{box-shadow:0 0 0 3px var(--marigold)}
+.cell.sel{outline:2px solid var(--indigo);outline-offset:1px}
+.cell .mark{position:absolute;top:5px;right:5px;width:7px;height:7px;border-radius:50%;background:var(--indigo)}
+.detail{margin-top:1rem;padding:1rem 1.1rem;border-radius:14px;background:var(--mist)}
+.detail-date{font-size:.85rem;color:var(--soft);font-weight:500}
+.detail-title{font-family:"Young Serif",Georgia,serif;font-size:1.15rem;margin:.15rem 0 .3rem}
+.detail-body{margin:0;color:var(--soft)}
+.hint{font-size:.85rem;color:var(--faint);margin-top:.6rem}
+.keys{list-style:none;margin:0;padding:0}
+.keys li{display:grid;grid-template-columns:11.5rem minmax(0,1fr);gap:.75rem;padding:.6rem 0;border-top:1px solid var(--line);color:var(--soft)}
+.keys b{color:var(--ink);font-weight:600;white-space:nowrap}
+@media (max-width:420px){.keys li{grid-template-columns:1fr;gap:.1rem}}
+.meds{list-style:none;margin:0;padding:0}
+.meds li{display:grid;grid-template-columns:14px minmax(0,1fr);gap:.85rem;padding:1rem 0;border-top:1px solid var(--line)}
+.meds .sw{width:14px;height:14px;border-radius:4px;margin-top:.35rem;display:block}
+.meds h3{font-size:1.1rem}
+.when-tag{font-size:.88rem;color:var(--indigo);font-weight:600;margin:.15rem 0 .3rem}
+.meds p{margin:0;color:var(--soft)}
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>Isa's egg freezing timeline</h1>
+    <p class="lede">Dates after the next period are estimates; the clinic adjusts them as the cycle goes.</p>
+  </header>
+
+
+  <h2>October 2026</h2>
+  <div class="legend" aria-hidden="true">
+    <span><i style="background:var(--c-pill)"></i>Estrogen pills</span>
+    <span><i style="background:var(--c-shot)"></i>Injections</span>
+    <span><i class="hatch"></i>Retrieval window</span>
+    <span><i style="background:var(--c-rest)"></i>Recovery</span>
+  </div>
+  <div class="cal" role="grid" aria-label="October 2026 calendar">
+    <div class="dow">Sun</div><div class="dow">Mon</div><div class="dow">Tue</div><div class="dow">Wed</div><div class="dow">Thu</div><div class="dow">Fri</div><div class="dow">Sat</div>
+    <div id="days" style="display:contents"></div>
+  </div>
+  <div class="detail" id="detail" aria-live="polite">
+    <div class="detail-date" id="d-date"></div>
+    <div class="detail-title" id="d-title"></div>
+    <p class="detail-body" id="d-body"></p>
+  </div>
+  <p class="hint">Tap any day to see what's happening. Dates from October 9 on are estimates.</p>
+
+  <h2>Key dates</h2>
+  <ul class="keys">
+    <li><b>Fri, Oct 2</b>Estrogen pills start, one every night</li>
+    <li><b>About Oct 9</b>Period starts</li>
+    <li><b>About Oct 10</b>First ultrasound at UCSF, injections start that evening</li>
+    <li><b>About Oct 10 – 21</b>Injections every evening, clinic visits every 1 to 3 mornings</li>
+    <li><b>About Oct 19 – 22</b>Trigger shot at an exact time set by the clinic</li>
+    <li><b>About Oct 20 – 24</b>Egg retrieval. She needs a ride home</li>
+    <li><b>Late October</b>Recovery, period returns 1 to 2 weeks after</li>
+  </ul>
+
+  <h2>The medications</h2>
+  <ul class="meds">
+    <li><span class="sw" style="background:var(--c-pill)"></span><div><h3>Estradiol (Estrace)</h3><div class="when-tag">Pill at bedtime, Oct 2 until injections start</div><p>A form of estrogen. It keeps the follicles at a similar size so they grow together once injections begin, which helps more eggs mature at the same time.</p></div></li>
+    <li><span class="sw" style="background:var(--c-shot)"></span><div><h3>Gonal-f</h3><div class="when-tag">Evening injection, about 10 to 12 days</div><p>Follicle-stimulating hormone (FSH). It tells the ovaries to grow many follicles at once instead of the usual one.</p></div></li>
+    <li><span class="sw" style="background:var(--c-shot)"></span><div><h3>Menopur</h3><div class="when-tag">Evening injection, same days as Gonal-f</div><p>A mix of FSH and LH. It works alongside Gonal-f to help the follicles and the eggs inside them develop well.</p></div></li>
+    <li><span class="sw" style="background:var(--c-shot)"></span><div><h3>Cetrotide</h3><div class="when-tag">Morning injection, starting around day 5 of injections</div><p>The brakes. It stops the body from releasing the eggs on its own before the clinic can retrieve them.</p></div></li>
+    <li><span class="sw hatch"></span><div><h3>Novarel and Lupron (the trigger)</h3><div class="when-tag">Once, at an exact time set by the clinic</div><p>Together they give the eggs the final push to mature and get ready for release. Retrieval happens about 36 hours later, which is why the timing matters so much.</p></div></li>
+    <li><span class="sw" style="background:var(--c-rest)"></span><div><h3>Folic acid</h3><div class="when-tag">Daily throughout</div><p>A B vitamin the clinic recommends taking during treatment to support egg and overall health.</p></div></li>
+  </ul>
+
+  <h2>Retrieval day</h2>
+  <div class="day">
+    <ul>
+      <li><strong>She needs a ride home.</strong> The clinic requires someone to drive her after sedation. No rideshare alone.</li>
+      <li><strong>Plan a quiet rest day.</strong> Couch, heating pad, easy food, plenty of water.</li>
+      <li><strong>Cramping and bloating are expected.</strong> Tylenol helps. Ibuprofen is OK again after retrieval unless the clinic says otherwise.</li>
+      <li><strong>The exact date comes late.</strong> The clinic picks it based on how she responds, often with only a couple of days' notice.</li>
+    </ul>
+  </div>
+
+  <h2>Good to know</h2>
+  <div class="notes">
+    <p>During treatment Isa can't take ibuprofen, only Tylenol, and should skip high-impact or contact activities.</p>
+    <p>If something feels urgent, like severe pain, trouble breathing, or very fast swelling of the belly, call the UCSF clinic's 24/7 line: <a class="call" href="tel:+14153537475">415-353-7475</a>.</p>
+  </div>
+
+  <footer>Last updated October 5, 2026. Isa will update this page as the clinic confirms dates.</footer>
+</main>
+
+<script>
+(function(){
+  var D = {
+    pill:{t:'Estrogen pill tonight',b:'One pill at bedtime. It keeps the follicles growing evenly so more eggs mature together later.'},
+    period:{t:'Period expected',b:'When full flow starts, Isa tells the clinic. The first ultrasound is the next morning.'},
+    base:{t:'First ultrasound, then injections begin',b:'Morning ultrasound and blood test at UCSF. If everything is clear, the first evening injections happen tonight and the estrogen pills stop.'},
+    shot:{t:'Evening injections',b:'Two shots between 6 and 10 PM. Expect growing bloating and tiredness as the days go on.'},
+    blood:{t:'Blood test and evening injections',b:'Early-morning blood test at UCSF, then the usual two shots in the evening.'},
+    us:{t:'Ultrasound and blood test',b:'Morning check of how the follicles are growing. A third, morning shot usually starts around now, when the clinic says.'},
+    mon:{t:'Injections and monitoring',b:'Morning and evening shots, with clinic visits every 1 to 3 mornings. The clinic decides each step after every visit.'},
+    ret:{t:'Possible retrieval window',b:'The clinic picks the exact day based on how the follicles respond, often with a couple of days of notice. A trigger shot comes about 36 hours before. Isa needs a ride home.'},
+    rest:{t:'Recovery',b:'Rest, heating pad, easy food. Bloating and cramps fade over several days, and her period usually returns 1 to 2 weeks after retrieval.'},
+    none:{t:'Nothing scheduled',b:'A regular day.'}
+  };
+  var plan = {};
+  for (var d=2; d<=8; d++) plan[d]={c:'pill',k:'pill',tag:d===2?'Pills start':'Pill'};
+  plan[9]={c:'pill',k:'period',tag:'Period ~',mark:1};
+  plan[10]={c:'shot',k:'base',tag:'Scan + shots',mark:1};
+  for (d=11; d<=19; d++) plan[d]={c:'shot',k:(d<14?'shot':'mon'),tag:'Shots'};
+  plan[12]={c:'shot',k:'blood',tag:'Blood test',mark:1};
+  plan[14]={c:'shot',k:'us',tag:'Scan',mark:1};
+  for (d=20; d<=24; d++) plan[d]={c:'ret',k:'ret',tag:'Retrieval?'};
+  for (d=25; d<=31; d++) plan[d]={c:'rest',k:'rest',tag:d===25?'Recovery':''};
+  var W=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  var now=new Date(), today=(now.getFullYear()===2026&&now.getMonth()===9)?now.getDate():(now<new Date(2026,9,1)?0:99);
+  var box=document.getElementById('days'), html='';
+  var first=new Date(2026,9,1).getDay();
+  for (var i=0;i<first;i++) html+='<div class="cell empty" aria-hidden="true"></div>';
+  for (d=1; d<=31; d++){
+    var p=plan[d]||{c:'',k:'none',tag:''};
+    var cls='cell '+p.c+(d<today?' past':'')+(d===today?' is-today':'');
+    html+='<button type="button" class="'+cls+'" data-d="'+d+'" aria-label="October '+d+': '+D[p.k].t+'">'+(p.mark?'<span class="mark" aria-hidden="true"></span>':'')+'<span class="n">'+d+'</span><span class="tag">'+p.tag+'</span></button>';
+  }
+  box.innerHTML=html;
+  function show(d){
+    var p=plan[d]||{k:'none'}, info=D[p.k];
+    document.getElementById('d-date').textContent=W[new Date(2026,9,d).getDay()]+', October '+d+(d>=9?' (estimate)':'')+(d===today?' \u2014 today':'');
+    document.getElementById('d-title').textContent=info.t;
+    document.getElementById('d-body').textContent=info.b;
+    box.querySelectorAll('.sel').forEach(function(x){x.classList.remove('sel')});
+    var btn=box.querySelector('[data-d="'+d+'"]'); if(btn) btn.classList.add('sel');
+  }
+  box.addEventListener('click',function(e){var b=e.target.closest('.cell[data-d]'); if(b) show(+b.dataset.d);});
+  show(today>=1&&today<=31?today:2);
+
+})();
+</script>
+</body>
+</html>
