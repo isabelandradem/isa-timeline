@@ -99,6 +99,10 @@ footer{margin-top:3rem;padding-top:1rem;border-top:1px solid var(--line);font-si
 .cell.past{opacity:.45}
 .cell.is-today{box-shadow:0 0 0 3px var(--marigold)}
 .cell.sel{outline:2px solid var(--indigo);outline-offset:1px}
+.cell .vmark{position:absolute;top:4px;right:4px;width:9px;height:9px;border-radius:50%;border:2px solid var(--ink)}
+.legend i.ring{width:12px;height:12px;border-radius:50%;border:2px solid var(--ink)}
+.detail-extra{margin:.5rem 0 0;color:var(--ink);font-weight:500}
+.detail-extra:empty{display:none}
 .cell .mark{position:absolute;top:5px;right:5px;width:7px;height:7px;border-radius:50%;background:var(--indigo)}
 .detail{margin-top:1rem;padding:1rem 1.1rem;border-radius:14px;background:var(--mist)}
 .detail-date{font-size:.85rem;color:var(--soft);font-weight:500}
@@ -131,6 +135,7 @@ footer{margin-top:3rem;padding-top:1rem;border-top:1px solid var(--line);font-si
     <span><i style="background:var(--c-shot)"></i>Injections</span>
     <span><i class="hatch"></i>Retrieval window</span>
     <span><i style="background:var(--c-rest)"></i>Recovery</span>
+    <span><i class="ring"></i>Parents visiting</span>
   </div>
   <div class="cal" role="grid" aria-label="October 2026 calendar">
     <div class="dow">Sun</div><div class="dow">Mon</div><div class="dow">Tue</div><div class="dow">Wed</div><div class="dow">Thu</div><div class="dow">Fri</div><div class="dow">Sat</div>
@@ -140,6 +145,7 @@ footer{margin-top:3rem;padding-top:1rem;border-top:1px solid var(--line);font-si
     <div class="detail-date" id="d-date"></div>
     <div class="detail-title" id="d-title"></div>
     <p class="detail-body" id="d-body"></p>
+    <p class="detail-extra" id="d-extra"></p>
   </div>
   <p class="hint">Tap any day to see what's happening. Dates from October 9 on are estimates.</p>
 
@@ -149,6 +155,7 @@ footer{margin-top:3rem;padding-top:1rem;border-top:1px solid var(--line);font-si
     <li><b>About Oct 9</b>Period starts</li>
     <li><b>About Oct 10</b>First ultrasound at UCSF, injections start that evening</li>
     <li><b>About Oct 10 – 21</b>Injections every evening, clinic visits every 1 to 3 mornings</li>
+    <li><b>Oct 16 – 17</b>Isa's parents visit (exact days still being planned)</li>
     <li><b>About Oct 19 – 22</b>Trigger shot at an exact time set by the clinic</li>
     <li><b>About Oct 20 – 24</b>Egg retrieval. She needs a ride home</li>
     <li><b>Late October</b>Recovery, period returns 1 to 2 weeks after</li>
@@ -204,6 +211,8 @@ footer{margin-top:3rem;padding-top:1rem;border-top:1px solid var(--line);font-si
   for (d=11; d<=19; d++) plan[d]={c:'shot',k:(d<14?'shot':'mon'),tag:'Shots'};
   plan[12]={c:'shot',k:'blood',tag:'Blood test',mark:1};
   plan[14]={c:'shot',k:'us',tag:'Scan',mark:1};
+  plan[16].visit=1; plan[16].tag='Visit'; plan[17].visit=1; plan[17].tag='Visit';
+  var VISIT='Isa\'s parents are planning to visit around October 16 and 17.';
   for (d=20; d<=24; d++) plan[d]={c:'ret',k:'ret',tag:'Retrieval?'};
   for (d=25; d<=31; d++) plan[d]={c:'rest',k:'rest',tag:d===25?'Recovery':''};
   var W=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
@@ -214,7 +223,7 @@ footer{margin-top:3rem;padding-top:1rem;border-top:1px solid var(--line);font-si
   for (d=1; d<=31; d++){
     var p=plan[d]||{c:'',k:'none',tag:''};
     var cls='cell '+p.c+(d<today?' past':'')+(d===today?' is-today':'');
-    html+='<button type="button" class="'+cls+'" data-d="'+d+'" aria-label="October '+d+': '+D[p.k].t+'">'+(p.mark?'<span class="mark" aria-hidden="true"></span>':'')+'<span class="n">'+d+'</span><span class="tag">'+p.tag+'</span></button>';
+    html+='<button type="button" class="'+cls+'" data-d="'+d+'" aria-label="October '+d+': '+D[p.k].t+(p.visit?'. Parents visiting':'')+'">'+(p.visit?'<span class="vmark" aria-hidden="true"></span>':'')+(p.mark?'<span class="mark" aria-hidden="true"></span>':'')+'<span class="n">'+d+'</span><span class="tag">'+p.tag+'</span></button>';
   }
   box.innerHTML=html;
   function show(d){
@@ -222,6 +231,7 @@ footer{margin-top:3rem;padding-top:1rem;border-top:1px solid var(--line);font-si
     document.getElementById('d-date').textContent=W[new Date(2026,9,d).getDay()]+', October '+d+(d>=9?' (estimate)':'')+(d===today?' \u2014 today':'');
     document.getElementById('d-title').textContent=info.t;
     document.getElementById('d-body').textContent=info.b;
+    document.getElementById('d-extra').textContent=p.visit?VISIT:'';
     box.querySelectorAll('.sel').forEach(function(x){x.classList.remove('sel')});
     var btn=box.querySelector('[data-d="'+d+'"]'); if(btn) btn.classList.add('sel');
   }
