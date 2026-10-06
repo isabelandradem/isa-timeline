@@ -78,9 +78,9 @@ ol.timeline::before{content:"";position:absolute;left:11px;top:8px;bottom:8px;wi
 footer{margin-top:3rem;padding-top:1rem;border-top:1px solid var(--line);font-size:.85rem;color:var(--faint)}
 @media (max-width:420px){h1{font-size:1.8rem}}
 
-:root{--c-pill:#C9C3F2;--c-shot:#F4B9A0;--c-rest:#C8E6D6;--c-ret:#E9A522}
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--c-pill:#4B4592;--c-shot:#8A3F22;--c-rest:#25574A;--c-ret:#F2B84B}}
-:root[data-theme="dark"]{--c-pill:#4B4592;--c-shot:#8A3F22;--c-rest:#25574A;--c-ret:#F2B84B}
+:root{--c-heart:#D6336C;--c-pill:#C9C3F2;--c-shot:#F4B9A0;--c-rest:#C8E6D6;--c-ret:#E9A522}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--c-heart:#FF7BA6;--c-pill:#4B4592;--c-shot:#8A3F22;--c-rest:#25574A;--c-ret:#F2B84B}}
+:root[data-theme="dark"]{--c-heart:#FF7BA6;--c-pill:#4B4592;--c-shot:#8A3F22;--c-rest:#25574A;--c-ret:#F2B84B}
 .legend{display:flex;flex-wrap:wrap;gap:.4rem 1rem;font-size:.85rem;color:var(--soft);margin:-.25rem 0 1rem}
 .legend span{display:flex;align-items:center;gap:.4rem}
 .legend i{display:inline-block;width:14px;height:14px;border-radius:4px}
@@ -99,8 +99,9 @@ footer{margin-top:3rem;padding-top:1rem;border-top:1px solid var(--line);font-si
 .cell.past{opacity:.45}
 .cell.is-today{box-shadow:0 0 0 3px var(--marigold)}
 .cell.sel{outline:2px solid var(--indigo);outline-offset:1px}
-.cell .vmark{position:absolute;top:4px;right:4px;width:9px;height:9px;border-radius:50%;border:2px solid var(--ink)}
-.legend i.ring{width:12px;height:12px;border-radius:50%;border:2px solid var(--ink)}
+.cell .vmark{position:absolute;top:4px;right:4px;width:12px;height:12px;line-height:0}
+.vmark svg,.legend i.heart svg{width:100%;height:100%;fill:var(--c-heart)}
+.legend i.heart{width:14px;height:14px;line-height:0}
 .detail-extra{margin:.5rem 0 0;color:var(--ink);font-weight:500}
 .detail-extra:empty{display:none}
 .cell .mark{position:absolute;top:5px;right:5px;width:7px;height:7px;border-radius:50%;background:var(--indigo)}
@@ -135,7 +136,7 @@ footer{margin-top:3rem;padding-top:1rem;border-top:1px solid var(--line);font-si
     <span><i style="background:var(--c-shot)"></i>Injections</span>
     <span><i class="hatch"></i>Retrieval window</span>
     <span><i style="background:var(--c-rest)"></i>Recovery</span>
-    <span><i class="ring"></i>Parents visiting</span>
+    <span><i class="heart"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.6-9.3C.9 8.2 3 4.5 6.6 4.5c2.1 0 3.6 1.2 5.4 3.1 1.8-1.9 3.3-3.1 5.4-3.1 3.6 0 5.7 3.7 4.2 7.2C19.5 16.4 12 21 12 21z"/></svg></i>Parents in town</span>
   </div>
   <div class="cal" role="grid" aria-label="October 2026 calendar">
     <div class="dow">Sun</div><div class="dow">Mon</div><div class="dow">Tue</div><div class="dow">Wed</div><div class="dow">Thu</div><div class="dow">Fri</div><div class="dow">Sat</div>
@@ -155,7 +156,7 @@ footer{margin-top:3rem;padding-top:1rem;border-top:1px solid var(--line);font-si
     <li><b>About Oct 9</b>Period starts</li>
     <li><b>About Oct 10</b>First ultrasound at UCSF, injections start that evening</li>
     <li><b>About Oct 10 – 21</b>Injections every evening, clinic visits every 1 to 3 mornings</li>
-    <li><b>Oct 16 – 17</b>Isa's parents visit (exact days still being planned)</li>
+    <li><b>Oct 16 or 17 on</b>Isa's parents arrive and stay through retrieval</li>
     <li><b>About Oct 19 – 22</b>Trigger shot at an exact time set by the clinic</li>
     <li><b>About Oct 20 – 24</b>Egg retrieval. She needs a ride home</li>
     <li><b>Late October</b>Recovery, period returns 1 to 2 weeks after</li>
@@ -211,10 +212,12 @@ footer{margin-top:3rem;padding-top:1rem;border-top:1px solid var(--line);font-si
   for (d=11; d<=19; d++) plan[d]={c:'shot',k:(d<14?'shot':'mon'),tag:'Shots'};
   plan[12]={c:'shot',k:'blood',tag:'Blood test',mark:1};
   plan[14]={c:'shot',k:'us',tag:'Scan',mark:1};
-  plan[16].visit=1; plan[16].tag='Visit'; plan[17].visit=1; plan[17].tag='Visit';
-  var VISIT='Isa\'s parents are planning to visit around October 16 and 17.';
   for (d=20; d<=24; d++) plan[d]={c:'ret',k:'ret',tag:'Retrieval?'};
   for (d=25; d<=31; d++) plan[d]={c:'rest',k:'rest',tag:d===25?'Recovery':''};
+  for (d=16; d<=24; d++) plan[d].visit=1;
+  plan[16].tag='Arrive?'; plan[17].tag='Arrive?';
+  var HEART='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.6-9.3C.9 8.2 3 4.5 6.6 4.5c2.1 0 3.6 1.2 5.4 3.1 1.8-1.9 3.3-3.1 5.4-3.1 3.6 0 5.7 3.7 4.2 7.2C19.5 16.4 12 21 12 21z"/></svg>';
+  function visitText(d){return d<=17?'Isa\'s parents arrive on October 16 or 17 and stay through retrieval.':'Isa\'s parents are in town and staying through retrieval.';}
   var W=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
   var now=new Date(), today=(now.getFullYear()===2026&&now.getMonth()===9)?now.getDate():(now<new Date(2026,9,1)?0:99);
   var box=document.getElementById('days'), html='';
@@ -223,7 +226,7 @@ footer{margin-top:3rem;padding-top:1rem;border-top:1px solid var(--line);font-si
   for (d=1; d<=31; d++){
     var p=plan[d]||{c:'',k:'none',tag:''};
     var cls='cell '+p.c+(d<today?' past':'')+(d===today?' is-today':'');
-    html+='<button type="button" class="'+cls+'" data-d="'+d+'" aria-label="October '+d+': '+D[p.k].t+(p.visit?'. Parents visiting':'')+'">'+(p.visit?'<span class="vmark" aria-hidden="true"></span>':'')+(p.mark?'<span class="mark" aria-hidden="true"></span>':'')+'<span class="n">'+d+'</span><span class="tag">'+p.tag+'</span></button>';
+    html+='<button type="button" class="'+cls+'" data-d="'+d+'" aria-label="October '+d+': '+D[p.k].t+(p.visit?'. Parents in town':'')+'">'+(p.visit?'<span class="vmark">'+HEART+'</span>':'')+(p.mark?'<span class="mark" aria-hidden="true"></span>':'')+'<span class="n">'+d+'</span><span class="tag">'+p.tag+'</span></button>';
   }
   box.innerHTML=html;
   function show(d){
@@ -231,7 +234,7 @@ footer{margin-top:3rem;padding-top:1rem;border-top:1px solid var(--line);font-si
     document.getElementById('d-date').textContent=W[new Date(2026,9,d).getDay()]+', October '+d+(d>=9?' (estimate)':'')+(d===today?' \u2014 today':'');
     document.getElementById('d-title').textContent=info.t;
     document.getElementById('d-body').textContent=info.b;
-    document.getElementById('d-extra').textContent=p.visit?VISIT:'';
+    document.getElementById('d-extra').textContent=p.visit?visitText(d):'';
     box.querySelectorAll('.sel').forEach(function(x){x.classList.remove('sel')});
     var btn=box.querySelector('[data-d="'+d+'"]'); if(btn) btn.classList.add('sel');
   }
