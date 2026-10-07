@@ -123,6 +123,44 @@ footer{margin-top:3rem;padding-top:1rem;border-top:1px solid var(--line);font-si
 .meds h3{font-size:1.1rem}
 .when-tag{font-size:.88rem;color:var(--indigo);font-weight:600;margin:.15rem 0 .3rem}
 .meds p{margin:0;color:var(--soft)}
+.tabs{display:flex;gap:4px;margin:1.5rem 0 0;padding:4px;background:var(--mist);border-radius:999px;width:fit-content;max-width:100%}
+.tab{display:inline-flex;align-items:center;min-height:44px;padding:0 1.2rem;border-radius:999px;color:var(--soft);font-weight:600;text-decoration:none}
+.tab[aria-current="page"]{background:var(--card);color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.08)}
+.tab:focus-visible{outline:2px solid var(--indigo);outline-offset:2px}
+[hidden]{display:none!important}
+.medjump{display:flex;flex-wrap:wrap;gap:.5rem;margin:.25rem 0 0}
+.medjump a{display:inline-flex;align-items:center;min-height:40px;padding:0 1rem;border:1px solid var(--line);border-radius:999px;background:var(--card);color:var(--ink);font-weight:600;text-decoration:none}
+.facts{margin:1rem 0 1.5rem;padding:1.1rem 1.25rem;background:var(--mist);border-radius:18px}
+.facts dl{display:grid;grid-template-columns:auto minmax(0,1fr);gap:.35rem 1rem;margin:.4rem 0 0}
+.facts dt{color:var(--soft)}
+.facts dd{margin:0;font-weight:600}
+.parts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;margin:0 0 1.5rem}
+@media (max-width:520px){.parts{grid-template-columns:1fr}}
+.parts div{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:.9rem 1rem}
+.parts ul{margin:.4rem 0 0;padding-left:1.1rem;color:var(--soft)}
+.parts li{margin:.25rem 0}
+.parts b{color:var(--ink);font-weight:600}
+ol.hsteps{list-style:none;margin:0;padding:0}
+.hstep{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:1.1rem 1.1rem .5rem;margin:0 0 1rem}
+.hstep h3{display:flex;align-items:center;gap:.6rem}
+.num{flex:none;display:inline-grid;place-items:center;width:32px;height:32px;border-radius:50%;background:var(--indigo);color:var(--paper);font-family:"Figtree",system-ui,sans-serif;font-weight:600;font-size:1rem}
+.hstep.side{background:var(--mist);border-color:transparent}
+.hstep.side .num{background:var(--marigold);color:var(--marigold-ink)}
+.checks{list-style:none;margin:.6rem 0 .4rem;padding:0}
+.checks label{display:grid;grid-template-columns:24px minmax(0,1fr);gap:.75rem;padding:.5rem 0;cursor:pointer;align-items:start}
+.checks input{width:22px;height:22px;margin:.15rem 0 0;accent-color:var(--indigo);cursor:pointer}
+.checks input:checked + span{color:var(--faint)}
+.checks strong{font-weight:600}
+.warn{margin:.35rem 0 .75rem;padding:.55rem .85rem;border-left:3px solid var(--marigold);background:var(--paper);border-radius:0 8px 8px 0;font-size:.95rem;color:var(--ink)}
+.hstep.side .warn{background:var(--card)}
+.warn b{font-weight:600}
+.branch{margin:.35rem 0 .75rem;padding-left:2.25rem;color:var(--soft)}
+.branch li{margin:.3rem 0}
+.branch b{color:var(--ink);font-weight:600}
+.howto-actions{display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;margin:0 0 1rem}
+.reset{font:inherit;font-weight:600;color:var(--indigo);background:transparent;border:1px solid var(--line);border-radius:999px;min-height:40px;padding:0 1rem;cursor:pointer}
+.reset:focus-visible{outline:2px solid var(--indigo);outline-offset:2px}
+.source{font-size:.85rem;color:var(--faint)}
 </style>
 </head>
 <body>
@@ -131,7 +169,12 @@ footer{margin-top:3rem;padding-top:1rem;border-top:1px solid var(--line);font-si
     <h1>Isa's egg freezing timeline</h1>
     <p class="lede">Isa's period started on October 7, and the plan counts from that day. Dates from October 8 on are estimates, and the clinic adjusts them as the cycle goes.</p>
   </header>
+  <nav class="tabs" aria-label="Sections">
+    <a class="tab" href="#timeline" data-tab="timeline">Timeline</a>
+    <a class="tab" href="#how-to" data-tab="how-to">How-to</a>
+  </nav>
 
+  <section id="tab-timeline" aria-label="Timeline">
 
   <h2>October 2026</h2>
   <div class="legend" aria-hidden="true">
@@ -191,6 +234,157 @@ footer{margin-top:3rem;padding-top:1rem;border-top:1px solid var(--line);font-si
     <p>During treatment Isa can't take ibuprofen, only Tylenol, and should skip high-impact or contact activities.</p>
     <p>If something feels urgent, like severe pain, trouble breathing, or very fast swelling of the belly, call the UCSF clinic's 24/7 line: <a class="call" href="tel:+14153537475">415-353-7475</a>.</p>
   </div>
+  </section>
+
+  <section id="tab-how-to" aria-label="How-to" hidden>
+  <h2>Injection how-to</h2>
+  <p class="lede" style="margin-top:0">Step-by-step notes for doing each shot at home. Tick the boxes as you go, and use "Start over" before the next injection.</p>
+  <div class="medjump" aria-label="Medications"><a href="#how-to" data-jump="gonal-f">Gonal-f</a></div>
+
+  <h2 id="gonal-f">Gonal-f</h2>
+  <div class="facts">
+    <strong>Quick facts</strong>
+    <dl>
+      <dt>Dose</dt><dd>300 IU, unless the clinic changes it</dd>
+      <dt>When</dt><dd>Every evening</dd>
+      <dt>Where</dt><dd>Under the skin of your belly</dd>
+      <dt>Pen</dt><dd>GONAL-f RFF Redi-ject, 900 IU</dd>
+      <dt>Max per shot</dt><dd>450 IU on this pen</dd>
+    </dl>
+  </div>
+
+  <h3>Know the parts</h3>
+  <div class="parts" style="margin-top:.75rem">
+    <div><b>The pen</b>
+      <ul>
+        <li><b>Pen cap:</b> the white cap on the needle end</li>
+        <li><b>Reservoir:</b> the clear section that holds the medicine</li>
+        <li><b>Dose display:</b> the small window that shows a number</li>
+        <li><b>Dose knob:</b> the red end you turn and press</li>
+      </ul>
+    </div>
+    <div><b>The needle</b> (a new one every time)
+      <ul>
+        <li><b>Peel-off seal:</b> the paper tab on top</li>
+        <li><b>Outer needle cap:</b> the big plastic cap. Keep it.</li>
+        <li><b>Inner shield:</b> the thin green cover. Throw it away.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="howto-actions">
+    <strong>Checklist</strong>
+    <button type="button" class="reset" id="reset-gonal">Start over</button>
+  </div>
+  <ol class="hsteps" id="steps-gonal">
+    <li class="hstep">
+      <h3><span class="num">0</span>Set up</h3>
+      <ul class="checks">
+        <li><label><input type="checkbox"><span>Take the pen out of the fridge <strong>at least 30 minutes</strong> before the shot so it warms to room temperature.</span></label></li>
+        <li><label><input type="checkbox"><span>Clear a clean, flat, well-lit table or counter.</span></label></li>
+        <li><label><input type="checkbox"><span>Have ready: the pen, a new needle, an alcohol pad, the sharps container, and a pen to write in the diary.</span></label></li>
+        <li><label><input type="checkbox"><span>Fill in today's date, time, and dose in the treatment diary.</span></label></li>
+      </ul>
+      <p class="warn"><b>Don't</b> warm the pen in a microwave or with any other heat.</p>
+    </li>
+
+    <li class="hstep">
+      <h3><span class="num">1</span>Get ready</h3>
+      <ul class="checks">
+        <li><label><input type="checkbox"><span>Wash your hands with soap and water and dry them well.</span></label></li>
+        <li><label><input type="checkbox"><span>Take the pen and a new needle out of the box with your hands.</span></label></li>
+        <li><label><input type="checkbox"><span>Check that the pen says <strong>GONAL-f RFF Redi-ject</strong> and isn't past its expiration date.</span></label></li>
+      </ul>
+      <p class="warn"><b>Don't</b> shake the pen, since that makes air bubbles. Don't use scissors or a knife on the box, and don't use a pen that's expired, cracked, or was dropped.</p>
+    </li>
+
+    <li class="hstep">
+      <h3><span class="num">2</span>Choose and clean the spot</h3>
+      <ul class="checks">
+        <li><label><input type="checkbox"><span>Pick a spot on your belly, in the area around your belly button that the clinic showed you. Use a different spot than last time.</span></label></li>
+        <li><label><input type="checkbox"><span>Wipe it with an alcohol pad and let it dry.</span></label></li>
+      </ul>
+      <p class="warn"><b>Don't</b> touch or blow on the spot after cleaning it.</p>
+    </li>
+
+    <li class="hstep">
+      <h3><span class="num">3</span>Attach the needle</h3>
+      <ul class="checks">
+        <li><label><input type="checkbox"><span>Pull off the pen cap.</span></label></li>
+        <li><label><input type="checkbox"><span>Check the reservoir isn't cracked and the medicine is <strong>clear, colorless, and has no particles</strong>. If it isn't, stop and call the clinic.</span></label></li>
+        <li><label><input type="checkbox"><span>Check the needle's paper seal isn't broken. If it is, use a different needle.</span></label></li>
+        <li><label><input type="checkbox"><span>Peel off the paper seal.</span></label></li>
+        <li><label><input type="checkbox"><span>Push the needle onto the clear end of the pen and twist until it stops. Snug, not extra tight.</span></label></li>
+        <li><label><input type="checkbox"><span>Pull off the big outer needle cap. <strong>Keep it</strong> for later.</span></label></li>
+        <li><label><input type="checkbox"><span>With the needle pointing up, pull off the thin green inner shield and throw it away.</span></label></li>
+      </ul>
+      <p class="warn"><b>Don't</b> put the thin inner shield back on the needle. That's how needle sticks happen.</p>
+    </li>
+
+    <li class="hstep side">
+      <h3><span class="num">!</span>First time using this pen?</h3>
+      <ul class="branch">
+        <li><b>New pen:</b> look for a drop of liquid at the needle tip. If you see one, go to step 4. If you don't, or you aren't sure, do "Make a droplet" below first.</li>
+        <li><b>Pen you've used before:</b> skip this and go to step 4.</li>
+      </ul>
+    </li>
+
+    <li class="hstep">
+      <h3><span class="num">4</span>Dial your dose</h3>
+      <ul class="checks">
+        <li><label><input type="checkbox"><span>Turn the dose knob until the display shows your dose, <strong>300</strong>.</span></label></li>
+      </ul>
+      <p class="warn"><b>Don't</b> push or pull the knob while turning it. If you go past your dose, just turn it back. If you're not sure of today's dose, call the clinic.</p>
+    </li>
+
+    <li class="hstep">
+      <h3><span class="num">5</span>Inject</h3>
+      <ul class="checks">
+        <li><label><input type="checkbox"><span>Check the display matches today's dose in the diary.</span></label></li>
+        <li><label><input type="checkbox"><span>Hold the pen <strong>straight at 90°</strong> to your skin and push the needle all the way in.</span></label></li>
+        <li><label><input type="checkbox"><span>Put your thumb in the middle of the dose knob and slowly press it straight down as far as it goes.</span></label></li>
+        <li><label><input type="checkbox"><span>Keep pressing and <strong>count slowly to 5</strong>.</span></label></li>
+        <li><label><input type="checkbox"><span>Pull the needle out of your skin, <strong>then</strong> let go of the knob. Set the pen down.</span></label></li>
+        <li><label><input type="checkbox"><span>Look at the display. Write "Yes" in the diary if it shows <strong>0</strong>, or "No" if it doesn't.</span></label></li>
+      </ul>
+      <p class="warn"><b>Don't</b> let go of the knob while the needle is still in. Going in at an angle can bend the needle.</p>
+      <ul class="branch">
+        <li><b>Shows 0:</b> you got the full dose.</li>
+        <li><b>Shows another number:</b> that's how much is still missing. Write it in the diary, then do steps 1 to 7 again with a new pen, dialing that number.</li>
+      </ul>
+    </li>
+
+    <li class="hstep">
+      <h3><span class="num">6</span>Remove the needle</h3>
+      <ul class="checks">
+        <li><label><input type="checkbox"><span>Lay the big outer needle cap on its side on the table.</span></label></li>
+        <li><label><input type="checkbox"><span>Holding only the pen, slide the needle into the cap. Don't hold the cap with your other hand.</span></label></li>
+        <li><label><input type="checkbox"><span>Press the capped needle against something firm and upright, like the side of the Gonal-f box or a wall, until you hear a <strong>click</strong>.</span></label></li>
+        <li><label><input type="checkbox"><span>Twist off the capped needle and drop it in the sharps container.</span></label></li>
+        <li><label><input type="checkbox"><span>Put the pen cap back on. If the pen is empty, it goes in the sharps container too.</span></label></li>
+      </ul>
+    </li>
+
+    <li class="hstep">
+      <h3><span class="num">7</span>Write it down</h3>
+      <ul class="checks">
+        <li><label><input type="checkbox"><span>Finish the diary row: whether the display showed 0, and if not, the number it showed.</span></label></li>
+      </ul>
+    </li>
+
+    <li class="hstep side" id="gonal-droplet">
+      <h3><span class="num">+</span>Make a droplet (new pen only)</h3>
+      <ul class="checks">
+        <li><label><input type="checkbox"><span>Turn the dose knob to <strong>25</strong>.</span></label></li>
+        <li><label><input type="checkbox"><span>Point the needle up and gently tap the clear reservoir so any bubbles rise to the top.</span></label></li>
+        <li><label><input type="checkbox"><span>Still pointing up, slowly press the knob all the way in. One or more drops should appear at the needle tip.</span></label></li>
+        <li><label><input type="checkbox"><span>Let go of the knob and check the display reads <strong>0</strong>. Then go to step 4.</span></label></li>
+      </ul>
+      <p class="warn"><b>No droplet?</b> Call the clinic before injecting.</p>
+    </li>
+  </ol>
+  <p class="source">Based on the instructions that came with the GONAL-f RFF Redi-ject pen. If the clinic tells you something different, do what the clinic says.</p>
+  </section>
 
   <footer>Last updated October 7, 2026. Isa will update this page as the clinic confirms dates.</footer>
 </main>
@@ -247,6 +441,21 @@ footer{margin-top:3rem;padding-top:1rem;border-top:1px solid var(--line);font-si
   box.addEventListener('click',function(e){var b=e.target.closest('.cell[data-d]'); if(b) show(+b.dataset.d);});
   show(today>=1&&today<=31?today:2);
 
+  var tabs=document.querySelectorAll('.tab');
+  function route(){
+    var name=location.hash==='#how-to'?'how-to':'timeline';
+    document.getElementById('tab-timeline').hidden=name!=='timeline';
+    document.getElementById('tab-how-to').hidden=name!=='how-to';
+    tabs.forEach(function(t){ if(t.dataset.tab===name) t.setAttribute('aria-current','page'); else t.removeAttribute('aria-current'); });
+  }
+  window.addEventListener('hashchange',route); route();
+  document.querySelectorAll('[data-jump]').forEach(function(a){
+    a.addEventListener('click',function(){ setTimeout(function(){ document.getElementById(a.dataset.jump).scrollIntoView({behavior:'smooth'}); },0); });
+  });
+  document.getElementById('reset-gonal').addEventListener('click',function(){
+    document.querySelectorAll('#steps-gonal input[type=checkbox]').forEach(function(c){ c.checked=false; });
+    document.getElementById('steps-gonal').scrollIntoView({behavior:'smooth'});
+  });
 })();
 </script>
 </body>
