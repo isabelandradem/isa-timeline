@@ -161,6 +161,36 @@ ol.hsteps{list-style:none;margin:0;padding:0}
 .reset{font:inherit;font-weight:600;color:var(--indigo);background:transparent;border:1px solid var(--line);border-radius:999px;min-height:40px;padding:0 1rem;cursor:pointer}
 .reset:focus-visible{outline:2px solid var(--indigo);outline-offset:2px}
 .source{font-size:.85rem;color:var(--faint)}
+.fig{margin:.75rem 0 1.25rem;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:1rem 1rem .5rem}
+.diagram{display:block;width:100%;height:auto}
+.dose-fig{max-width:340px;margin:.25rem 0 .75rem;padding:.75rem}
+.dose-fig figcaption{font-size:.88rem;color:var(--soft);margin:.4rem 0 .1rem}
+.pen .pbody{fill:#F3F4F7;stroke:#7D8699;stroke-width:1.5}
+.pen .pclip{fill:#E1E4EA;stroke:#9AA2B2;stroke-width:1}
+.pen .pconn{fill:#CDD2DB;stroke:#7D8699;stroke-width:1.5}
+.pen .pthread,.pen .ptick,.pen .prib{stroke:#5F6878;stroke-width:1.2;fill:none}
+.pen .prib{stroke:#9AA2B2}
+.pen .pres{fill:#DCEAF5;fill-opacity:.85;stroke:#7D8699;stroke-width:1.5}
+.pen .pplunger{fill:#4A5160}
+.pen .prod{fill:#C3CAD6}
+.pen .plabel{fill:#D4D8E0}
+.pen .pwin{fill:#7A1F2E}
+.pen .pwinin{fill:#FFFFFF}
+.pen .pnum{font:700 11px "Figtree",system-ui,sans-serif;fill:#1C2333;text-anchor:middle}
+.pen .pnum.big{font-size:22px}
+.pen .pknob{fill:#A3243B;stroke:#7A1F2E;stroke-width:1.5}
+.pen .pgrip{stroke:#7A1F2E;stroke-width:2;fill:none}
+.pen .pseal{fill:#F7F1E8;stroke:#B9A88E;stroke-width:1.5}
+.pen .pcap{fill:#E8EBF0;fill-opacity:.9;stroke:#7D8699;stroke-width:1.5}
+.pen .pshield{fill:#2E9C8A;stroke:#1F7366;stroke-width:1.5}
+.pen .pneedle{stroke:#5F6878;stroke-width:2.5;stroke-linecap:round}
+.lead{stroke:var(--soft);stroke-width:1.5}
+.co{fill:var(--indigo)}
+.con{font:600 17px "Figtree",system-ui,sans-serif;fill:var(--paper);text-anchor:middle}
+.partlist{margin:.75rem 0 .25rem;padding:0;list-style:none;counter-reset:part}
+.partlist li{counter-increment:part;position:relative;padding:.45rem 0 .45rem 2.4rem;color:var(--soft);border-top:1px solid var(--line)}
+.partlist li::before{content:counter(part);position:absolute;left:0;top:.45rem;display:grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--indigo);color:var(--paper);font-weight:600;font-size:.9rem}
+.partlist b{color:var(--ink);font-weight:600}
 </style>
 </head>
 <body>
@@ -254,23 +284,61 @@ ol.hsteps{list-style:none;margin:0;padding:0}
   </div>
 
   <h3>Know the parts</h3>
-  <div class="parts" style="margin-top:.75rem">
-    <div><b>The pen</b>
-      <ul>
-        <li><b>Pen cap:</b> the white cap on the needle end</li>
-        <li><b>Reservoir:</b> the clear section that holds the medicine</li>
-        <li><b>Dose display:</b> the small window that shows a number</li>
-        <li><b>Dose knob:</b> the red end you turn and press</li>
-      </ul>
-    </div>
-    <div><b>The needle</b> (a new one every time)
-      <ul>
-        <li><b>Peel-off seal:</b> the paper tab on top</li>
-        <li><b>Outer needle cap:</b> the big plastic cap. Keep it.</li>
-        <li><b>Inner shield:</b> the thin green cover. Throw it away.</li>
-      </ul>
-    </div>
-  </div>
+  <figure class="fig">
+    <svg class="diagram" viewBox="0 0 640 200" role="img" aria-labelledby="pen-t">
+      <title id="pen-t">Drawing of the Gonal-f pen with its cap off, numbered left to right: 1 pen cap, 2 needle connector, 3 reservoir, 4 plunger, 5 expiration date, 6 dose display, 7 dose knob.</title>
+      <g class="pen">
+        <path d="M150 90 H28 Q12 90 12 110 Q12 130 28 130 H150 Z" class="pbody"/>
+        <path d="M40 102 H112 L124 106 L112 110 H40 Z" class="pclip"/>
+        <rect x="166" y="100" width="22" height="20" rx="2" class="pconn"/>
+        <path d="M170 100 V120 M175 100 V120 M180 100 V120 M185 100 V120" class="pthread"/>
+        <rect x="188" y="92" width="144" height="36" rx="3" class="pres"/>
+        <path d="M200 96 V104 M212 96 V102 M224 96 V104 M236 96 V102 M248 96 V104 M260 96 V102 M200 124 V116 M224 124 V118 M248 124 V116" class="ptick"/>
+        <rect x="270" y="94" width="22" height="32" rx="2" class="pplunger"/>
+        <path d="M276 94 V126 M282 94 V126 M288 94 V126" class="prib"/>
+        <rect x="292" y="104" width="40" height="12" class="prod"/>
+        <rect x="330" y="88" width="192" height="44" rx="6" class="pbody"/>
+        <rect x="342" y="95" width="56" height="10" rx="2" class="plabel"/>
+        <rect x="444" y="104" width="52" height="20" rx="3" class="pwin"/>
+        <rect x="450" y="107" width="40" height="14" rx="2" class="pwinin"/>
+        <text x="470" y="118.5" class="pnum">300</text>
+        <path d="M520 84 H588 Q596 84 596 92 V128 Q596 136 588 136 H520 Z" class="pknob"/>
+        <path d="M534 84 V136 M548 84 V136 M562 84 V136" class="pgrip"/>
+        <rect x="594" y="90" width="22" height="40" rx="8" class="pknob"/>
+      </g>
+      <line x1="80" y1="40" x2="80" y2="90" class="lead"/><circle cx="80" cy="40" r="15" class="co"/><text x="80" y="45.5" class="con">1</text><line x1="177" y1="170" x2="177" y2="120" class="lead"/><circle cx="177" cy="170" r="15" class="co"/><text x="177" y="175.5" class="con">2</text><line x1="226" y1="40" x2="226" y2="92" class="lead"/><circle cx="226" cy="40" r="15" class="co"/><text x="226" y="45.5" class="con">3</text><line x1="281" y1="170" x2="281" y2="126" class="lead"/><circle cx="281" cy="170" r="15" class="co"/><text x="281" y="175.5" class="con">4</text><line x1="370" y1="40" x2="370" y2="95" class="lead"/><circle cx="370" cy="40" r="15" class="co"/><text x="370" y="45.5" class="con">5</text><line x1="470" y1="40" x2="470" y2="104" class="lead"/><circle cx="470" cy="40" r="15" class="co"/><text x="470" y="45.5" class="con">6</text><line x1="568" y1="40" x2="568" y2="84" class="lead"/><circle cx="568" cy="40" r="15" class="co"/><text x="568" y="45.5" class="con">7</text>
+    </svg>
+    <ol class="partlist">
+      <li><b>Pen cap.</b> Covers the needle end. Comes off before you attach a needle.</li>
+      <li><b>Needle connector.</b> The threaded tip the needle twists onto.</li>
+      <li><b>Reservoir.</b> The clear part that holds the medicine. Check it isn't cracked and the liquid is clear.</li>
+      <li><b>Plunger.</b> The dark part inside the reservoir that pushes the medicine out.</li>
+      <li><b>Expiration date.</b> Printed on the label.</li>
+      <li><b>Dose display.</b> The window showing how many IU are dialed. After a shot it should read 0.</li>
+      <li><b>Dose knob.</b> The red end. Turn it to dial, press it to inject.</li>
+    </ol>
+  </figure>
+  <figure class="fig">
+    <svg class="diagram" viewBox="0 0 640 160" role="img" aria-labelledby="ndl-t">
+      <title id="ndl-t">Drawing of the four needle parts, numbered: 1 peel-off seal, 2 outer needle cap, 3 green inner needle shield, 4 the needle.</title>
+      <g class="pen">
+        <path d="M66 38 Q66 30 74 30 H90 Q98 30 98 38 V86 Q98 96 88 98 L84 112 Q82 118 78 112 L74 98 Q66 96 66 86 Z" class="pseal"/>
+        <path d="M200 62 H262 V82 H200 Q192 82 192 72 Q192 62 200 62 Z" class="pcap"/>
+        <rect x="260" y="48" width="26" height="48" rx="5" class="pcap"/>
+        <rect x="372" y="64" width="58" height="16" rx="8" class="pshield"/>
+        <path d="M500 72 H548" class="pneedle"/>
+        <rect x="546" y="52" width="40" height="40" rx="6" class="pconn"/>
+        <path d="M554 52 V92 M562 52 V92 M570 52 V92 M578 52 V92" class="pthread"/>
+      </g>
+      <line x1="82" y1="140" x2="82" y2="118" class="lead"/><circle cx="82" cy="140" r="15" class="co"/><text x="82" y="145.5" class="con">1</text><line x1="240" y1="140" x2="240" y2="96" class="lead"/><circle cx="240" cy="140" r="15" class="co"/><text x="240" y="145.5" class="con">2</text><line x1="401" y1="140" x2="401" y2="80" class="lead"/><circle cx="401" cy="140" r="15" class="co"/><text x="401" y="145.5" class="con">3</text><line x1="544" y1="140" x2="544" y2="96" class="lead"/><circle cx="544" cy="140" r="15" class="co"/><text x="544" y="145.5" class="con">4</text>
+    </svg>
+    <ol class="partlist">
+      <li><b>Peel-off seal.</b> The paper tab on top of a new needle. Don't use the needle if it's torn.</li>
+      <li><b>Outer needle cap.</b> The big plastic cap. Keep it for removing the needle afterward.</li>
+      <li><b>Inner needle shield.</b> The thin green cover right on the needle. Throw it away.</li>
+      <li><b>Needle.</b> Use a new one for every shot.</li>
+    </ol>
+  </figure>
 
   <div class="howto-actions">
     <strong>Checklist</strong>
@@ -334,6 +402,20 @@ ol.hsteps{list-style:none;margin:0;padding:0}
       <ul class="checks">
         <li><label><input type="checkbox"><span>Turn the dose knob until the display shows your dose, <strong>300</strong>.</span></label></li>
       </ul>
+      <figure class="fig dose-fig">
+        <svg class="diagram" viewBox="0 0 320 96" role="img" aria-labelledby="dose-t">
+          <title id="dose-t">Close-up of the pen's dose display window reading 300.</title>
+          <g class="pen">
+            <rect x="0" y="18" width="210" height="60" rx="8" class="pbody"/>
+            <rect x="90" y="28" width="104" height="40" rx="6" class="pwin"/>
+            <rect x="100" y="34" width="84" height="28" rx="4" class="pwinin"/>
+            <text x="142" y="56.5" class="pnum big">300</text>
+            <path d="M208 12 H300 Q312 12 312 24 V72 Q312 84 300 84 H208 Z" class="pknob"/>
+            <path d="M232 12 V84 M256 12 V84 M280 12 V84" class="pgrip"/>
+          </g>
+        </svg>
+        <figcaption>What the display looks like when 300 is dialed.</figcaption>
+      </figure>
       <p class="warn"><b>Don't</b> push or pull the knob while turning it. If you go past your dose, just turn it back. If you're not sure of today's dose, call the clinic.</p>
     </li>
 
