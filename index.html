@@ -96,6 +96,9 @@ footer{margin-top:3rem;padding-top:1rem;border-top:1px solid var(--line);font-si
 .cell.shot{background:var(--c-shot);border-color:transparent}
 .cell.rest{background:var(--c-rest);border-color:transparent}
 .cell.ret{background:repeating-linear-gradient(135deg,var(--c-ret) 0 3px,transparent 3px 7px),var(--card);border-color:var(--c-ret)}
+.cell.ret .tag{align-self:flex-start;max-width:100%;background:var(--card);padding:1px 4px;margin:0 -2px -1px;border-radius:5px}
+.cell.ret .n{align-self:flex-start;background:var(--card);padding:2px 4px;margin:-2px -2px 0;border-radius:5px}
+.cell .tag em{display:block;font-weight:400}
 .cell.past{opacity:.45}
 .cell.is-today{box-shadow:0 0 0 3px var(--marigold)}
 .cell.sel{outline:2px solid var(--indigo);outline-offset:1px}
@@ -218,7 +221,7 @@ footer{margin-top:3rem;padding-top:1rem;border-top:1px solid var(--line);font-si
   for (d=18; d<=22; d++) plan[d]={c:'ret',k:'ret',tag:'Retrieval?'};
   for (d=23; d<=31; d++) plan[d]={c:'rest',k:'rest',tag:d===23?'Recovery':''};
   for (d=16; d<=22; d++) plan[d].visit=1;
-  plan[16].tag='Arrive?'; plan[17].tag='Arrive?';
+  plan[16].sub='Arrive?'; plan[17].sub='Arrive?';
   var HEART='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.6-9.3C.9 8.2 3 4.5 6.6 4.5c2.1 0 3.6 1.2 5.4 3.1 1.8-1.9 3.3-3.1 5.4-3.1 3.6 0 5.7 3.7 4.2 7.2C19.5 16.4 12 21 12 21z"/></svg>';
   function visitText(d){return d<=17?'Isa\'s parents arrive on October 16 or 17 and stay through retrieval.':'Isa\'s parents are in town and staying through retrieval.';}
   var W=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
@@ -229,7 +232,7 @@ footer{margin-top:3rem;padding-top:1rem;border-top:1px solid var(--line);font-si
   for (d=1; d<=31; d++){
     var p=plan[d]||{c:'',k:'none',tag:''};
     var cls='cell '+p.c+(d<today?' past':'')+(d===today?' is-today':'');
-    html+='<button type="button" class="'+cls+'" data-d="'+d+'" aria-label="October '+d+': '+D[p.k].t+(p.visit?'. Parents in town':'')+'">'+(p.visit?'<span class="vmark">'+HEART+'</span>':'')+(p.mark?'<span class="mark" aria-hidden="true"></span>':'')+'<span class="n">'+d+'</span><span class="tag">'+p.tag+'</span></button>';
+    html+='<button type="button" class="'+cls+'" data-d="'+d+'" aria-label="October '+d+': '+D[p.k].t+(p.visit?'. Parents in town':'')+'">'+(p.visit?'<span class="vmark">'+HEART+'</span>':'')+(p.mark?'<span class="mark" aria-hidden="true"></span>':'')+'<span class="n">'+d+'</span><span class="tag">'+p.tag+(p.sub?'<em>'+p.sub+'</em>':'')+'</span></button>';
   }
   box.innerHTML=html;
   function show(d){
