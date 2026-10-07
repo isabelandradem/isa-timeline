@@ -191,6 +191,8 @@ ol.hsteps{list-style:none;margin:0;padding:0}
 .partlist li{counter-increment:part;position:relative;padding:.45rem 0 .45rem 2.4rem;color:var(--soft);border-top:1px solid var(--line)}
 .partlist li::before{content:counter(part);position:absolute;left:0;top:.45rem;display:grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--indigo);color:var(--paper);font-weight:600;font-size:.9rem}
 .partlist b{color:var(--ink);font-weight:600}
+.stepimg{display:block;width:100%;max-width:420px;height:auto;margin:.25rem 0 .6rem 2.25rem;width:calc(100% - 2.25rem);border-radius:12px;border:1px solid var(--line)}
+.source a{color:inherit}
 </style>
 </head>
 <body>
@@ -379,12 +381,12 @@ ol.hsteps{list-style:none;margin:0;padding:0}
       <h3><span class="num">3</span>Attach the needle</h3>
       <ul class="checks">
         <li><label><input type="checkbox"><span>Pull off the pen cap.</span></label></li>
-        <li><label><input type="checkbox"><span>Check the reservoir isn't cracked and the medicine is <strong>clear, colorless, and has no particles</strong>. If it isn't, stop and call the clinic.</span></label></li>
-        <li><label><input type="checkbox"><span>Check the dose display reads <strong>0</strong>. If it doesn't, turn the dose knob backward until it does.</span></label></li>
-        <li><label><input type="checkbox"><span>Wipe the clear threaded tip of the pen with an alcohol pad.</span></label></li>
+        <li><label><input type="checkbox"><span>Check the reservoir isn't cracked and the medicine is <strong>clear, colorless, and has no particles</strong>. If it isn't, stop and call the clinic.</span></label><img class="stepimg" src="img/gonal-reservoir.webp" width="2000" height="1181" loading="lazy" alt="Close-up of the pen's clear reservoir holding clear liquid, with markings from 0 to 900."></li>
+        <li><label><input type="checkbox"><span>Check the dose display reads <strong>0</strong>. If it doesn't, turn the dose knob backward until it does.</span></label><img class="stepimg" src="img/gonal-display-zero.webp" width="2000" height="1190" loading="lazy" alt="The dose display window next to the dose knob, reading 0."></li>
+        <li><label><input type="checkbox"><span>Wipe the clear threaded tip of the pen with an alcohol pad.</span></label><img class="stepimg" src="img/gonal-wipe-tip.webp" width="1780" height="1228" loading="lazy" alt="Hands wiping the clear tip of the pen with an alcohol pad."></li>
         <li><label><input type="checkbox"><span>Check the needle's paper seal isn't broken. If it is, use a different needle.</span></label></li>
         <li><label><input type="checkbox"><span>Peel off the paper seal.</span></label></li>
-        <li><label><input type="checkbox"><span>Push the needle onto the clear end of the pen and twist until it stops. Snug, not extra tight.</span></label></li>
+        <li><label><input type="checkbox"><span>Push the needle onto the clear end of the pen and twist until it stops. Snug, not extra tight.</span></label><img class="stepimg" src="img/gonal-attach-needle.webp" width="1098" height="1098" loading="lazy" alt="Hands twisting a capped needle onto the clear tip of the pen."></li>
         <li><label><input type="checkbox"><span>Pull off the big outer needle cap. <strong>Keep it</strong> for later.</span></label></li>
         <li><label><input type="checkbox"><span>With the needle pointing up, pull off the thin green inner shield and throw it away.</span></label></li>
       </ul>
@@ -467,7 +469,7 @@ ol.hsteps{list-style:none;margin:0;padding:0}
       <p class="warn"><b>No droplet?</b> Call the clinic before injecting.</p>
     </li>
   </ol>
-  <p class="source">Based on the instructions that came with the GONAL-f RFF Redi-ject pen. If the clinic tells you something different, do what the clinic says.</p>
+  <p class="source">Based on the instructions that came with the GONAL-f RFF Redi-ject pen. Photos are stills from the EngagedMD training video. If the clinic tells you something different, do what the clinic says.</p>
   </section>
 
   <footer>Last updated October 7, 2026. Isa will update this page as the clinic confirms dates.</footer>
