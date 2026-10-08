@@ -193,6 +193,19 @@ ol.hsteps{list-style:none;margin:0;padding:0}
 .partlist b{color:var(--ink);font-weight:600}
 .stepimg{display:block;width:100%;max-width:420px;height:auto;margin:.25rem 0 .6rem 2.25rem;width:calc(100% - 2.25rem);border-radius:12px;border:1px solid var(--line)}
 .source a{color:inherit}
+.trip{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:1.1rem 1.2rem;margin:.75rem 0 1.5rem}
+.trip-head{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem}
+.trip-title{font-family:"Young Serif",Georgia,serif;font-size:1.2rem;line-height:1.25}
+.trip-sub{color:var(--soft);font-size:.95rem;margin-top:.15rem}
+.trip .pill{margin:.2rem 0 0;flex:none}
+.trip-dl{display:grid;grid-template-columns:auto minmax(0,1fr);gap:.4rem 1rem;margin:1rem 0 0;padding-top:.85rem;border-top:1px solid var(--line)}
+.trip-dl dt{color:var(--soft)}
+.trip-dl dd{margin:0;font-weight:500}
+.trip-link{margin:.85rem 0 0}
+.trip-link a,.source a{color:var(--indigo);font-weight:600}
+.todo{margin:.6rem 0 1.5rem;padding-left:1.2rem}
+.todo li{margin:.5rem 0;color:var(--soft)}
+.todo b{color:var(--ink);font-weight:600}
 </style>
 </head>
 <body>
@@ -204,6 +217,7 @@ ol.hsteps{list-style:none;margin:0;padding:0}
   <nav class="tabs" aria-label="Sections">
     <a class="tab" href="#timeline" data-tab="timeline">Timeline</a>
     <a class="tab" href="#how-to" data-tab="how-to">How-to</a>
+    <a class="tab" href="#travel" data-tab="travel">Travel</a>
   </nav>
 
   <section id="tab-timeline" aria-label="Timeline">
@@ -237,6 +251,7 @@ ol.hsteps{list-style:none;margin:0;padding:0}
     <li><b>Mon, Oct 12</b>Clinic appointment, details to come</li>
     <li><b>Oct 8 – about 19</b>Injections every evening, clinic visits every 1 to 3 mornings</li>
     <li><b>Oct 16 or 17 on</b>Isa's parents arrive and stay through retrieval</li>
+    <li><b>Sun – Thu, Oct 18 – 22</b>Isa's parents at the Metro Hotel</li>
     <li><b>About Oct 17 – 20</b>Trigger shot at an exact time set by the clinic</li>
     <li><b>About Oct 18 – 22</b>Egg retrieval. She needs a ride home</li>
     <li><b>Late October</b>Recovery, period returns 1 to 2 weeks after</li>
@@ -473,6 +488,64 @@ ol.hsteps{list-style:none;margin:0;padding:0}
   <p class="source">Based on the instructions that came with the GONAL-f RFF Redi-ject pen. Photos are stills from the EngagedMD training video. If the clinic tells you something different, do what the clinic says.</p>
   </section>
 
+  <section id="tab-travel" aria-label="Travel" hidden>
+  <h2>Travel for Mom and Dad</h2>
+  <p class="lede" style="margin-top:0">Where you're staying and what's still being figured out. Isa will update this as plans firm up.</p>
+
+  <div class="facts">
+    <strong>At a glance</strong>
+    <dl>
+      <dt>Arrive</dt><dd>Fri Oct 16 or Sat Oct 17</dd>
+      <dt>Hotel</dt><dd>Sun Oct 18 to Thu Oct 22</dd>
+      <dt>Stay until</dt><dd>After retrieval, about Oct 18 to 22</dd>
+    </dl>
+  </div>
+
+  <h3>Hotel</h3>
+  <div class="trip">
+    <div class="trip-head">
+      <div>
+        <div class="trip-title">The Metro Hotel</div>
+        <div class="trip-sub">San Francisco, a few minutes from Isa's place</div>
+      </div>
+      <span class="pill pill-done">Booked</span>
+    </div>
+    <dl class="trip-dl">
+      <dt>Check in</dt><dd>Sunday, October 18</dd>
+      <dt>Check out</dt><dd>Thursday, October 22</dd>
+      <dt>Nights</dt><dd>4</dd>
+      <dt>Room</dt><dd>Two full beds</dd>
+      <dt>Booked by</dt><dd>Isa, who has the confirmation email with the address and check-in time</dd>
+    </dl>
+    <p class="trip-link"><a href="https://metrohotelsf.com/" rel="noopener">Hotel website</a></p>
+  </div>
+
+  <h3>Flights</h3>
+  <div class="trip">
+    <div class="trip-head">
+      <div>
+        <div class="trip-title">Not booked yet</div>
+        <div class="trip-sub">Aim to land Friday Oct 16 or Saturday Oct 17</div>
+      </div>
+      <span class="pill pill-now">To do</span>
+    </div>
+  </div>
+
+  <h3>Still being figured out</h3>
+  <ul class="todo">
+    <li><b>Oct 16 and 17 nights.</b> The hotel starts Sunday, so the first night or two need a plan.</li>
+    <li><b>After Thursday Oct 22.</b> If retrieval lands late in the window, you may want to stay a few more days to help while Isa recovers.</li>
+  </ul>
+
+  <h3>How you can help</h3>
+  <ul class="todo">
+    <li><b>Retrieval day ride.</b> Isa needs someone to take her home after sedation. No rideshare on her own.</li>
+    <li><b>The day after.</b> Easy food, a heating pad, and company. Cramping and bloating are normal.</li>
+    <li><b>Dates move.</b> The clinic sets the retrieval day with only a couple of days' notice, so keep plans flexible.</li>
+  </ul>
+  <p class="source">More detail on the <a href="#timeline">Timeline</a> tab, under "Retrieval day."</p>
+  </section>
+
   <footer>Last updated October 8, 2026. Isa will update this page as the clinic confirms dates.</footer>
 </main>
 
@@ -506,7 +579,7 @@ ol.hsteps{list-style:none;margin:0;padding:0}
   for (d=16; d<=22; d++) plan[d].visit=1;
   plan[16].sub='Arrive?'; plan[17].sub='Arrive?';
   var HEART='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.6-9.3C.9 8.2 3 4.5 6.6 4.5c2.1 0 3.6 1.2 5.4 3.1 1.8-1.9 3.3-3.1 5.4-3.1 3.6 0 5.7 3.7 4.2 7.2C19.5 16.4 12 21 12 21z"/></svg>';
-  function visitText(d){return d<=17?'Isa\'s parents arrive on October 16 or 17 and stay through retrieval.':'Isa\'s parents are in town and staying through retrieval.';}
+  function visitText(d){return d<=17?'Isa\'s parents arrive on October 16 or 17 and stay through retrieval.':(d<=21?'Isa\'s parents are in town, staying at the Metro Hotel near Isa\'s place.':'Isa\'s parents check out of the Metro Hotel today and are staying through retrieval.');}
   var W=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
   var now=new Date(), today=(now.getFullYear()===2026&&now.getMonth()===9)?now.getDate():(now<new Date(2026,9,1)?0:99);
   var box=document.getElementById('days'), html='';
@@ -532,9 +605,8 @@ ol.hsteps{list-style:none;margin:0;padding:0}
 
   var tabs=document.querySelectorAll('.tab');
   function route(){
-    var name=location.hash==='#how-to'?'how-to':'timeline';
-    document.getElementById('tab-timeline').hidden=name!=='timeline';
-    document.getElementById('tab-how-to').hidden=name!=='how-to';
+    var h=location.hash.slice(1), name=(h==='how-to'||h==='travel')?h:'timeline';
+    ['timeline','how-to','travel'].forEach(function(n){ document.getElementById('tab-'+n).hidden=n!==name; });
     tabs.forEach(function(t){ if(t.dataset.tab===name) t.setAttribute('aria-current','page'); else t.removeAttribute('aria-current'); });
   }
   window.addEventListener('hashchange',route); route();
