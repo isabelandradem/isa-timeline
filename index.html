@@ -199,7 +199,7 @@ ol.hsteps{list-style:none;margin:0;padding:0}
 <main>
   <header>
     <h1>Isa's egg freezing timeline</h1>
-    <p class="lede">Isa's period started on October 7, and the plan counts from that day. Dates from October 8 on are estimates, and the clinic adjusts them as the cycle goes.</p>
+    <p class="lede">Isa's period started on October 8. The clinic did the first scan that morning, and injections start that night. Dates from October 9 on are estimates unless marked confirmed, and the clinic adjusts them as the cycle goes.</p>
   </header>
   <nav class="tabs" aria-label="Sections">
     <a class="tab" href="#timeline" data-tab="timeline">Timeline</a>
@@ -226,15 +226,16 @@ ol.hsteps{list-style:none;margin:0;padding:0}
     <p class="detail-body" id="d-body"></p>
     <p class="detail-extra" id="d-extra"></p>
   </div>
-  <p class="hint">Tap any day to see what's happening. Dates from October 8 on are estimates.</p>
+  <p class="hint">Tap any day to see what's happening. Dates from October 9 on are estimates unless marked confirmed.</p>
 
   <h2>Key dates</h2>
   <ul class="keys">
     <li><b>Fri, Oct 2</b>Estrogen pills start, one every night</li>
-    <li><b>Tue, Oct 6</b>Spotting started</li>
-    <li><b>Wed, Oct 7</b>Period started</li>
-    <li><b>About Oct 8</b>First ultrasound at UCSF, injections start that evening</li>
-    <li><b>About Oct 8 – 19</b>Injections every evening, clinic visits every 1 to 3 mornings</li>
+    <li><b>Tue – Wed, Oct 6 – 7</b>Spotting</li>
+    <li><b>Thu, Oct 8</b>Period started. First ultrasound at UCSF, first injections that night</li>
+    <li><b>Sat, Oct 10</b>Ultrasound at UCSF</li>
+    <li><b>Mon, Oct 12</b>Clinic appointment, details to come</li>
+    <li><b>Oct 8 – about 19</b>Injections every evening, clinic visits every 1 to 3 mornings</li>
     <li><b>Oct 16 or 17 on</b>Isa's parents arrive and stay through retrieval</li>
     <li><b>About Oct 17 – 20</b>Trigger shot at an exact time set by the clinic</li>
     <li><b>About Oct 18 – 22</b>Egg retrieval. She needs a ride home</li>
@@ -472,7 +473,7 @@ ol.hsteps{list-style:none;margin:0;padding:0}
   <p class="source">Based on the instructions that came with the GONAL-f RFF Redi-ject pen. Photos are stills from the EngagedMD training video. If the clinic tells you something different, do what the clinic says.</p>
   </section>
 
-  <footer>Last updated October 7, 2026. Isa will update this page as the clinic confirms dates.</footer>
+  <footer>Last updated October 8, 2026. Isa will update this page as the clinic confirms dates.</footer>
 </main>
 
 <script>
@@ -480,8 +481,10 @@ ol.hsteps{list-style:none;margin:0;padding:0}
   var D = {
     pill:{t:'Estrogen pill tonight',b:'One pill at bedtime. It keeps the follicles growing evenly so more eggs mature together later.'},
     spot:{t:'Spotting started',b:'Light spotting, a sign the period was on its way. Estrogen pill at bedtime as usual.'},
-    period:{t:'Period started',b:'Full flow started today. Isa tells the clinic, and the first ultrasound is the next morning. Estrogen pill at bedtime as usual.'},
-    base:{t:'First ultrasound, then injections begin',b:'Morning ultrasound and blood test at UCSF. If everything is clear, the first evening injections happen tonight and the estrogen pills stop.'},
+    spot2:{t:'Still spotting',b:'More spotting, but not the full period yet. Estrogen pill at bedtime as usual.'},
+    base:{t:'Period started, first scan, first shots',b:'Full flow started today. The clinic did the first ultrasound this morning and gave the go-ahead, so the first evening injections are tonight and the estrogen pills stop.'},
+    sat:{t:'Ultrasound at UCSF',b:'Follow-up ultrasound the clinic scheduled. The usual evening injections tonight.'},
+    clinic:{t:'Clinic appointment',b:'The clinic asked Isa to come in today. Details to come. The usual evening injections tonight.'},
     shot:{t:'Evening injections',b:'Two shots between 6 and 10 PM. Expect growing bloating and tiredness as the days go on.'},
     blood:{t:'Blood test and evening injections',b:'Early-morning blood test at UCSF, then the usual two shots in the evening.'},
     us:{t:'Ultrasound and blood test',b:'Morning check of how the follicles are growing. A third, morning shot usually starts around now, when the clinic says.'},
@@ -493,11 +496,11 @@ ol.hsteps{list-style:none;margin:0;padding:0}
   var plan = {};
   for (var d=2; d<=5; d++) plan[d]={c:'pill',k:'pill',tag:d===2?'Pills start':'Pill'};
   plan[6]={c:'pill',k:'spot',tag:'Spotting'};
-  plan[7]={c:'pill',k:'period',tag:'Period',mark:1};
-  plan[8]={c:'shot',k:'base',tag:'Scan + shots',mark:1};
+  plan[7]={c:'pill',k:'spot2',tag:'Spotting'};
+  plan[8]={c:'shot',k:'base',tag:'Period, scan, shots',mark:1};
   for (d=9; d<=17; d++) plan[d]={c:'shot',k:(d<12?'shot':'mon'),tag:'Shots'};
-  plan[10]={c:'shot',k:'blood',tag:'Blood test',mark:1};
-  plan[12]={c:'shot',k:'us',tag:'Scan',mark:1};
+  plan[10]={c:'shot',k:'sat',tag:'Scan',mark:1,firm:1};
+  plan[12]={c:'shot',k:'clinic',tag:'Clinic',mark:1,firm:1};
   for (d=18; d<=22; d++) plan[d]={c:'ret',k:'ret',tag:'Retrieval?'};
   for (d=23; d<=31; d++) plan[d]={c:'rest',k:'rest',tag:d===23?'Recovery':''};
   for (d=16; d<=22; d++) plan[d].visit=1;
@@ -517,7 +520,7 @@ ol.hsteps{list-style:none;margin:0;padding:0}
   box.innerHTML=html;
   function show(d){
     var p=plan[d]||{k:'none'}, info=D[p.k];
-    document.getElementById('d-date').textContent=W[new Date(2026,9,d).getDay()]+', October '+d+(d>=8?' (estimate)':'')+(d===today?' \u2014 today':'');
+    document.getElementById('d-date').textContent=W[new Date(2026,9,d).getDay()]+', October '+d+(d>=9?(p.firm?' (confirmed)':' (estimate)'):'')+(d===today?' \u2014 today':'');
     document.getElementById('d-title').textContent=info.t;
     document.getElementById('d-body').textContent=info.b;
     document.getElementById('d-extra').textContent=p.visit?visitText(d):'';
