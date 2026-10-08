@@ -206,6 +206,17 @@ ol.hsteps{list-style:none;margin:0;padding:0}
 .todo{margin:.6rem 0 1.5rem;padding-left:1.2rem}
 .todo li{margin:.5rem 0;color:var(--soft)}
 .todo b{color:var(--ink);font-weight:600}
+:root{--c-hotel:#BFE0E6}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--c-hotel:#21535C}}
+:root[data-theme="dark"]{--c-hotel:#21535C}
+.cell.t-hotel{background:var(--c-hotel);border-color:transparent}
+.cell.t-out{background:linear-gradient(135deg,var(--c-hotel) 0 50%,var(--card) 50% 100%);border-color:var(--c-hotel)}
+.cell.t-arr{border:2px dashed var(--marigold)}
+.legend i.t-arr{border:2px dashed var(--marigold);background:transparent}
+.legend i.t-out{background:linear-gradient(135deg,var(--c-hotel) 0 50%,var(--card) 50% 100%);border:1px solid var(--c-hotel)}
+.cell .rbar{position:absolute;left:5px;right:5px;bottom:4px;height:6px;border-radius:3px;background:repeating-linear-gradient(135deg,var(--c-ret) 0 3px,transparent 3px 6px);border:1px solid var(--c-ret)}
+.cell.t-hotel .tag,.cell.t-out .tag,.cell.t-arr .tag{margin-bottom:9px}
+.cell:has(.rbar) .tag{margin-bottom:9px}
 </style>
 </head>
 <body>
@@ -501,6 +512,24 @@ ol.hsteps{list-style:none;margin:0;padding:0}
     </dl>
   </div>
 
+  <h3>Calendar</h3>
+  <div class="legend" aria-hidden="true" style="margin-top:.6rem">
+    <span><i class="t-arr"></i>Possible arrival</span>
+    <span><i style="background:var(--c-hotel)"></i>Metro Hotel night</span>
+    <span><i class="t-out"></i>Check out</span>
+    <span><i class="hatch"></i>Possible retrieval day</span>
+  </div>
+  <div class="cal" role="grid" aria-label="October 11 to 31 trip calendar">
+    <div class="dow">Sun</div><div class="dow">Mon</div><div class="dow">Tue</div><div class="dow">Wed</div><div class="dow">Thu</div><div class="dow">Fri</div><div class="dow">Sat</div>
+    <div id="tdays" style="display:contents"></div>
+  </div>
+  <div class="detail" aria-live="polite">
+    <div class="detail-date" id="t-date"></div>
+    <div class="detail-title" id="t-title"></div>
+    <p class="detail-body" id="t-body"></p>
+  </div>
+  <p class="hint">Tap any day for details. Retrieval days are estimates until the clinic sets the date.</p>
+
   <h3>Hotel</h3>
   <div class="trip">
     <div class="trip-head">
@@ -537,13 +566,6 @@ ol.hsteps{list-style:none;margin:0;padding:0}
     <li><b>After Thursday Oct 22.</b> If retrieval lands late in the window, you may want to stay a few more days to help while Isa recovers.</li>
   </ul>
 
-  <h3>How you can help</h3>
-  <ul class="todo">
-    <li><b>Retrieval day ride.</b> Isa needs someone to take her home after sedation. No rideshare on her own.</li>
-    <li><b>The day after.</b> Easy food, a heating pad, and company. Cramping and bloating are normal.</li>
-    <li><b>Dates move.</b> The clinic sets the retrieval day with only a couple of days' notice, so keep plans flexible.</li>
-  </ul>
-  <p class="source">More detail on the <a href="#timeline">Timeline</a> tab, under "Retrieval day."</p>
   </section>
 
   <footer>Last updated October 8, 2026. Isa will update this page as the clinic confirms dates.</footer>
@@ -602,6 +624,38 @@ ol.hsteps{list-style:none;margin:0;padding:0}
   }
   box.addEventListener('click',function(e){var b=e.target.closest('.cell[data-d]'); if(b) show(+b.dataset.d);});
   show(today>=1&&today<=31?today:2);
+
+  var T={
+    arr:{t:'Possible arrival day',b:'Mom and Dad land on Friday or Saturday. Flights aren\'t booked yet, and where to sleep this night is still being planned.'},
+    in:{t:'Check in at the Metro Hotel',b:'First night at the hotel. Also the first possible retrieval day.'},
+    night:{t:'Night at the Metro Hotel',b:'Possible retrieval day. The clinic sets the exact date with a couple of days\' notice.'},
+    out:{t:'Check out of the Metro Hotel',b:'Check out in the morning. Last day of the retrieval window. Where to stay after this, if longer, is still being decided.'},
+    after:{t:'After the hotel',b:'Isa is recovering. Whether Mom and Dad stay longer is still being decided.'},
+    before:{t:'Before the trip',b:'Isa is doing her at-home injections and clinic visits. Nothing planned for the trip yet.'}
+  };
+  var tp={};
+  for (d=11; d<=15; d++) tp[d]={c:'',k:'before',tag:''};
+  tp[16]={c:'t-arr',k:'arr',tag:'Arrive?'}; tp[17]={c:'t-arr',k:'arr',tag:'Arrive?'};
+  tp[18]={c:'t-hotel',k:'in',tag:'Check in',ret:1};
+  for (d=19; d<=21; d++) tp[d]={c:'t-hotel',k:'night',tag:'Hotel',ret:1};
+  tp[22]={c:'t-out',k:'out',tag:'Check out',ret:1};
+  for (d=23; d<=31; d++) tp[d]={c:'',k:'after',tag:''};
+  var tbox=document.getElementById('tdays'), th='';
+  for (d=11; d<=31; d++){
+    var q=tp[d];
+    th+='<button type="button" class="cell '+q.c+(d===today?' is-today':'')+'" data-d="'+d+'" aria-label="October '+d+': '+T[q.k].t+(q.ret?'. Possible retrieval day':'')+'"><span class="n">'+d+'</span><span class="tag">'+q.tag+'</span>'+(q.ret?'<span class="rbar" aria-hidden="true"></span>':'')+'</button>';
+  }
+  tbox.innerHTML=th;
+  function tshow(d){
+    var q=tp[d];
+    document.getElementById('t-date').textContent=W[new Date(2026,9,d).getDay()]+', October '+d;
+    document.getElementById('t-title').textContent=T[q.k].t;
+    document.getElementById('t-body').textContent=T[q.k].b;
+    tbox.querySelectorAll('.sel').forEach(function(x){x.classList.remove('sel')});
+    tbox.querySelector('[data-d="'+d+'"]').classList.add('sel');
+  }
+  tbox.addEventListener('click',function(e){var b=e.target.closest('.cell[data-d]'); if(b) tshow(+b.dataset.d);});
+  tshow(today>=11&&today<=31?today:18);
 
   var tabs=document.querySelectorAll('.tab');
   function route(){
