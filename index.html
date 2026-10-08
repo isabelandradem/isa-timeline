@@ -217,6 +217,8 @@ ol.hsteps{list-style:none;margin:0;padding:0}
 .cell .rbar{position:absolute;left:5px;right:5px;bottom:4px;height:6px;border-radius:3px;background:repeating-linear-gradient(135deg,var(--c-ret) 0 3px,transparent 3px 6px);border:1px solid var(--c-ret)}
 .cell.t-hotel .tag,.cell.t-out .tag,.cell.t-arr .tag{margin-bottom:9px}
 .cell:has(.rbar) .tag{margin-bottom:9px}
+.cell.t-gap{background:var(--mist);border:2px dotted var(--soft)}
+.legend i.t-gap{background:var(--mist);border:2px dotted var(--soft)}
 </style>
 </head>
 <body>
@@ -261,10 +263,11 @@ ol.hsteps{list-style:none;margin:0;padding:0}
     <li><b>Sat, Oct 10</b>Ultrasound at UCSF</li>
     <li><b>Mon, Oct 12</b>Clinic appointment, details to come</li>
     <li><b>Oct 8 – about 19</b>Injections every evening, clinic visits every 1 to 3 mornings</li>
-    <li><b>Oct 16 or 17 on</b>Isa's parents arrive and stay through retrieval</li>
+    <li><b>Sat, Oct 17</b>Isa's parents arrive</li>
     <li><b>Sun – Thu, Oct 18 – 22</b>Isa's parents at the Metro Hotel</li>
     <li><b>About Oct 17 – 20</b>Trigger shot at an exact time set by the clinic</li>
     <li><b>About Oct 18 – 22</b>Egg retrieval. She needs a ride home</li>
+    <li><b>Sun or Mon, Oct 25 or 26</b>Isa's parents fly home</li>
     <li><b>Late October</b>Recovery, period returns 1 to 2 weeks after</li>
   </ul>
 
@@ -506,18 +509,19 @@ ol.hsteps{list-style:none;margin:0;padding:0}
   <div class="facts">
     <strong>At a glance</strong>
     <dl>
-      <dt>Arrive</dt><dd>Fri Oct 16 or Sat Oct 17</dd>
+      <dt>Arrive</dt><dd>Saturday, Oct 17</dd>
       <dt>Hotel</dt><dd>Sun Oct 18 to Thu Oct 22</dd>
-      <dt>Stay until</dt><dd>After retrieval, about Oct 18 to 22</dd>
+      <dt>Fly home</dt><dd>Sunday Oct 25 or Monday Oct 26</dd>
     </dl>
   </div>
 
   <h3>Calendar</h3>
   <div class="legend" aria-hidden="true" style="margin-top:.6rem">
-    <span><i class="t-arr"></i>Possible arrival</span>
+    <span><i class="t-arr"></i>Travel day</span>
     <span><i style="background:var(--c-hotel)"></i>Metro Hotel night</span>
     <span><i class="t-out"></i>Check out</span>
     <span><i class="hatch"></i>Possible retrieval day</span>
+    <span><i class="t-gap"></i>Night not booked yet</span>
   </div>
   <div class="cal" role="grid" aria-label="October 11 to 31 trip calendar">
     <div class="dow">Sun</div><div class="dow">Mon</div><div class="dow">Tue</div><div class="dow">Wed</div><div class="dow">Thu</div><div class="dow">Fri</div><div class="dow">Sat</div>
@@ -554,7 +558,7 @@ ol.hsteps{list-style:none;margin:0;padding:0}
     <div class="trip-head">
       <div>
         <div class="trip-title">Not booked yet</div>
-        <div class="trip-sub">Aim to land Friday Oct 16 or Saturday Oct 17</div>
+        <div class="trip-sub">Land Saturday Oct 17, fly home Sunday Oct 25 or Monday Oct 26</div>
       </div>
       <span class="pill pill-now">To do</span>
     </div>
@@ -562,8 +566,8 @@ ol.hsteps{list-style:none;margin:0;padding:0}
 
   <h3>Still being figured out</h3>
   <ul class="todo">
-    <li><b>Oct 16 and 17 nights.</b> The hotel starts Sunday, so the first night or two need a plan.</li>
-    <li><b>After Thursday Oct 22.</b> If retrieval lands late in the window, you may want to stay a few more days to help while Isa recovers.</li>
+    <li><b>Saturday Oct 17 night.</b> The hotel starts Sunday, so arrival night needs a plan.</li>
+    <li><b>Thursday Oct 22 to Saturday Oct 24 nights.</b> The hotel ends Thursday morning. Sunday Oct 25 too, if flying home Monday.</li>
   </ul>
 
   </section>
@@ -598,10 +602,10 @@ ol.hsteps{list-style:none;margin:0;padding:0}
   plan[12]={c:'shot',k:'clinic',tag:'Clinic',mark:1,firm:1};
   for (d=18; d<=22; d++) plan[d]={c:'ret',k:'ret',tag:'Retrieval?'};
   for (d=23; d<=31; d++) plan[d]={c:'rest',k:'rest',tag:d===23?'Recovery':''};
-  for (d=16; d<=22; d++) plan[d].visit=1;
-  plan[16].sub='Arrive?'; plan[17].sub='Arrive?';
+  for (d=17; d<=26; d++) plan[d].visit=1;
+  plan[17].sub='Arrive'; plan[25].sub='Leave?'; plan[26].sub='Leave?';
   var HEART='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.6-9.3C.9 8.2 3 4.5 6.6 4.5c2.1 0 3.6 1.2 5.4 3.1 1.8-1.9 3.3-3.1 5.4-3.1 3.6 0 5.7 3.7 4.2 7.2C19.5 16.4 12 21 12 21z"/></svg>';
-  function visitText(d){return d<=17?'Isa\'s parents arrive on October 16 or 17 and stay through retrieval.':(d<=21?'Isa\'s parents are in town, staying at the Metro Hotel near Isa\'s place.':'Isa\'s parents check out of the Metro Hotel today and are staying through retrieval.');}
+  function visitText(d){return d===17?'Isa\'s parents arrive today.':(d<=21?'Isa\'s parents are in town, staying at the Metro Hotel near Isa\'s place.':(d===22?'Isa\'s parents check out of the Metro Hotel today and stay in town through the weekend.':(d<=24?'Isa\'s parents are in town while she recovers.':'Isa\'s parents fly home on Sunday Oct 25 or Monday Oct 26.')));}
   var W=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
   var now=new Date(), today=(now.getFullYear()===2026&&now.getMonth()===9)?now.getDate():(now<new Date(2026,9,1)?0:99);
   var box=document.getElementById('days'), html='';
@@ -626,20 +630,25 @@ ol.hsteps{list-style:none;margin:0;padding:0}
   show(today>=1&&today<=31?today:2);
 
   var T={
-    arr:{t:'Possible arrival day',b:'Mom and Dad land on Friday or Saturday. Flights aren\'t booked yet, and where to sleep this night is still being planned.'},
+    arr:{t:'Mom and Dad arrive',b:'Flights aren\'t booked yet. The hotel starts Sunday, so where to sleep tonight is still being planned.'},
+    gap:{t:'In town, no hotel booked',b:'Isa is recovering. Where to sleep these nights is still being planned.'},
+    dep25:{t:'Possible flight home',b:'Fly home today, or stay one more night and fly Monday. If staying, this night isn\'t booked yet.'},
+    dep26:{t:'Possible flight home',b:'Fly home today if staying through Sunday night.'},
     in:{t:'Check in at the Metro Hotel',b:'First night at the hotel. Also the first possible retrieval day.'},
     night:{t:'Night at the Metro Hotel',b:'Possible retrieval day. The clinic sets the exact date with a couple of days\' notice.'},
-    out:{t:'Check out of the Metro Hotel',b:'Check out in the morning. Last day of the retrieval window. Where to stay after this, if longer, is still being decided.'},
-    after:{t:'After the hotel',b:'Isa is recovering. Whether Mom and Dad stay longer is still being decided.'},
+    out:{t:'Check out of the Metro Hotel',b:'Check out in the morning. Last day of the retrieval window. Tonight isn\'t booked yet.'},
+    after:{t:'After the trip',b:'Mom and Dad are back home.'},
     before:{t:'Before the trip',b:'Isa is doing her at-home injections and clinic visits. Nothing planned for the trip yet.'}
   };
   var tp={};
-  for (d=11; d<=15; d++) tp[d]={c:'',k:'before',tag:''};
-  tp[16]={c:'t-arr',k:'arr',tag:'Arrive?'}; tp[17]={c:'t-arr',k:'arr',tag:'Arrive?'};
+  for (d=11; d<=16; d++) tp[d]={c:'',k:'before',tag:''};
+  tp[17]={c:'t-arr',k:'arr',tag:'Arrive'};
   tp[18]={c:'t-hotel',k:'in',tag:'Check in',ret:1};
   for (d=19; d<=21; d++) tp[d]={c:'t-hotel',k:'night',tag:'Hotel',ret:1};
   tp[22]={c:'t-out',k:'out',tag:'Check out',ret:1};
-  for (d=23; d<=31; d++) tp[d]={c:'',k:'after',tag:''};
+  tp[23]={c:'t-gap',k:'gap',tag:'No hotel'}; tp[24]={c:'t-gap',k:'gap',tag:'No hotel'};
+  tp[25]={c:'t-arr',k:'dep25',tag:'Leave?'}; tp[26]={c:'t-arr',k:'dep26',tag:'Leave?'};
+  for (d=27; d<=31; d++) tp[d]={c:'',k:'after',tag:''};
   var tbox=document.getElementById('tdays'), th='';
   for (d=11; d<=31; d++){
     var q=tp[d];
